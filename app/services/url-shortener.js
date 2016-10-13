@@ -26,6 +26,8 @@ UrlShortener.prototype.proccess = function() {
                     item.save(function (err) {
                         if (err)
                             console.log(err);
+                        else 
+                            console.log("item updated");
                     })
                 }
             });

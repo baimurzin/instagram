@@ -10,6 +10,17 @@ InboxReader = function(auth, db) {
 
 InboxReader.prototype.sendReply = function(reply) {
 	//find ready for reply url in db 
+	Client.Session.create(this.device, this.storage, this.auth.username, this.auth.password)
+		.then(function (session) {
+			var thread = Client.Thread.getById(session, reply);
+			return [session, thread];
+		})
+		.spread(function (session, thread) {
+			return thread.broadcastText('Hello');
+		})
+		.then(function (res) {
+			console.log(res);
+		})
 };
 
 InboxReader.prototype.read = function() {
@@ -28,7 +39,7 @@ InboxReader.prototype.read = function() {
 					status: 'WAIT',
 					last_activity: threadParams.last_activity
 				});
-				inbox.save(function (err) {
+				inbox.save(function(err) {
 					console.log(err);
 				})
 			});
@@ -42,7 +53,7 @@ function parseThread(thread) {
 	result.threadId = threadParams.id;
 	result.last_activity = threadParams.lastActivityAt;
 
-	_.each(threadParams.items || [], function (item) {
+	_.each(threadParams.items || [], function(item) {
 		if (item.type === 'mediaShare') {
 			var media = item.mediaShare;
 			//todo check mediaType == 2?

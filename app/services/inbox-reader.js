@@ -33,6 +33,9 @@ InboxReader.prototype.read = function() {
 		.spread(function(session, threads) {
 			threads.forEach(function(Thread, index, threads) {
 				var threadParams = parseThread(Thread);
+
+				//todo check for last_activity to avoid duplicates 
+
 				var inbox = new Inbox({
 					thread_id: threadParams.threadId,
 					url: threadParams.url,

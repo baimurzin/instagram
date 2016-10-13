@@ -16,7 +16,7 @@ InboxReader.prototype.sendReply = function(reply) {
 			return [session, thread];
 		})
 		.spread(function (session, thread) {
-			return thread.broadcastText('Hello');
+			return thread.broadcastText('http://google.com');
 		})
 		.then(function (res) {
 			console.log(res);

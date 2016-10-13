@@ -17,9 +17,19 @@ InboxReader.prototype.read = function() {
 			var feed = new Client.Feed.Inbox(session);
 			return [session, feed.all()];
 		})
-		.spread(function(session, feed) {
-			
+		.spread(function(session, threads) {
+			threads.forEach(function(Thread, index, threads) {
+				parseThread(Thread);
+			});
 		})
 };
+
+function parseThread(thread) {
+	var threadParams = thread.getParams();
+	var result = {};
+	var result.threadId = threadParams.id,
+		result.last_activity = threadParams.lastActivityAt;
+		
+}
 
 module.exports = InboxReader;

@@ -3,9 +3,10 @@ var mongoose = require('mongoose'),
 
 	mongoose.connect('mongodb://localhost/inst');
 
+var models = {};
 
 var inboxSchema = new Schema({
-	user: {
+	thread_id: {
 		type: String,
 		required: true
 	},
@@ -19,6 +20,8 @@ var inboxSchema = new Schema({
 		type: String,
 		default: 'WAIT'
 	},
+
+	last_activity: Date,
 
 	created_at: {
 		type: Date,
@@ -41,6 +44,7 @@ inboxSchema.pre('save', function(next) {
 	next();
 });
 
+
 var Inbox = mongoose.model('Inbox', inboxSchema);
 
-module.exports = Inbox;
+module.exports = Inbox

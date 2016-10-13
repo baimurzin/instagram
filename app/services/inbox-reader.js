@@ -5,6 +5,12 @@ InboxReader = function (auth) {
     this.storage = new Client.CookieFileStorage(__dirname + '/cookies/' + auth.username + '.json');
 };
 
-InboxReader.prototype.sendReply = function () {
-    
-}
+InboxReader.prototype.sendReply = function (reply) {
+
+};
+
+InboxReader.prototype.read = function () {
+
+};
+
+module.exports = InboxReader;

@@ -6,7 +6,7 @@ var db = require('./models/db'),
 
 
 App = function (account) {
-	this.DM = new inbox(account);
+	this.DM = new inbox(account, db);
 };
 
 App.prototype.start = function() {

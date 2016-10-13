@@ -1,7 +1,8 @@
 var Client = require('instagram-private-api').V1;
 var _ = require('underscore');
-
-InboxReader = function(auth) {
+var Inbox = require('../models/db');
+InboxReader = function(auth, db) {
+	this.db = db;
 	this.auth = auth;
 	this.device = new Client.Device(auth.username);
 	this.storage = new Client.CookieFileStorage(__dirname + '/../../cookies/' + auth.username + '.json');
@@ -20,7 +21,16 @@ InboxReader.prototype.read = function() {
 		})
 		.spread(function(session, threads) {
 			threads.forEach(function(Thread, index, threads) {
-				console.log(parseThread(Thread));
+				var threadParams = parseThread(Thread);
+				var inbox = new Inbox({
+					thread_id: threadParams.threadId,
+					url: threadParams.url,
+					status: 'WAIT',
+					last_activity: threadParams.last_activity
+				});
+				inbox.save(function (err) {
+					console.log(err);
+				})
 			});
 		})
 };

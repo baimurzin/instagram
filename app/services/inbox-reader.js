@@ -1,4 +1,5 @@
 var Client = require('instagram-private-api').V1;
+var _ = require('underscore');
 
 InboxReader = function(auth) {
 	this.auth = auth;
@@ -19,7 +20,7 @@ InboxReader.prototype.read = function() {
 		})
 		.spread(function(session, threads) {
 			threads.forEach(function(Thread, index, threads) {
-				parseThread(Thread);
+				console.log(parseThread(Thread));
 			});
 		})
 };
@@ -27,9 +28,28 @@ InboxReader.prototype.read = function() {
 function parseThread(thread) {
 	var threadParams = thread.getParams();
 	var result = {};
-	var result.threadId = threadParams.id,
-		result.last_activity = threadParams.lastActivityAt;
-		
+
+	result.threadId = threadParams.id;
+	result.last_activity = threadParams.lastActivityAt;
+
+	_.each(threadParams.items || [], function (item) {
+		if (item.type === 'mediaShare') {
+			var media = item.mediaShare;
+			//todo check mediaType == 2?
+			result.url = getMediaUrl(media);
+		}
+	});
+
+	return result;
+}
+
+function getMediaUrl(media) {
+	if (media.images) {
+		var images = media.images;
+		var largeImage = images[0];
+		var url = largeImage.url;
+		return url;
+	}
 }
 
 module.exports = InboxReader;

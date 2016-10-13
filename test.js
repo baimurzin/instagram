@@ -20,4 +20,9 @@ var App = new app({
 	password: 'Notepad123'
 });
 
-App.start();
+
+var timeId = setInterval(function () {
+	App.start();
+}, 2000);
+
+//47 000 1:02 PM memory usage

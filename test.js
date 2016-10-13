@@ -1,8 +1,8 @@
 //var username = 'sweet_home_prod',
 //
-var Client = require('instagram-private-api').V1,
-    device = new Client.Device(username),
-    storage = new Client.CookieFileStorage(__dirname + '/cookies/' + username + '.json');
+// var Client = require('instagram-private-api').V1,
+//     device = new Client.Device(username),
+//     storage = new Client.CookieFileStorage(__dirname + '/cookies/' + username + '.json');
 //
 //Client.Session.create(device, storage, username, password)
 //    .then(function (session) {
@@ -13,7 +13,7 @@ var Client = require('instagram-private-api').V1,
 //
 //    });
 
-var key = '';
+var key = 'AIzaSyCWmPvWVXnkoZOAmUbyObrqjnjnpd7_TsU';
 var url = require('./app/services/url-shortener');
 var Url = new url(1, {key: key});
 

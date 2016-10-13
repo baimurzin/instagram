@@ -1,5 +1,4 @@
 //var username = 'sweet_home_prod',
-//    password = 'Notepad123';
 //
 var Client = require('instagram-private-api').V1,
     device = new Client.Device(username),
@@ -14,7 +13,8 @@ var Client = require('instagram-private-api').V1,
 //
 //    });
 
+var key = '';
 var url = require('./app/services/url-shortener');
-var Url = new url(1, {key:'AIzaSyCWmPvWVXnkoZOAmUbyObrqjnjnpd7_TsU'});
+var Url = new url(1, {key: key});
 
 Url.make('http://google.com');

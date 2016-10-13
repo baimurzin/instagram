@@ -13,8 +13,11 @@
 //
 //    });
 
-var key = 'AIzaSyCWmPvWVXnkoZOAmUbyObrqjnjnpd7_TsU';
-var url = require('./app/services/url-shortener');
-var Url = new url(1, {key: key});
+var app = require('./app/app');
 
-Url.make('http://google.com');
+var App = new app({
+	username: 'sweet_home_prod',
+	password: 'Notepad123'
+});
+
+App.start();

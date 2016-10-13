@@ -6,10 +6,10 @@ function UrlShortener(db, conf) {
     this.key = conf.key;
 }
 
-UrlShortener.prototype.make = function (long) {
+UrlShortener.prototype.proccess = function () {
     var params = {
         resource: {
-            longUrl: long
+            longUrl: 'http://google.com'
         },
         auth: this.key
     };
